@@ -28,3 +28,9 @@ DATA = {
 #     'ингредиент2': количество2,
 #   }
 # }
+def calculator(request, recipe):
+    person = int(request.GET.get('person', 1))
+    context = {'recipe':{}}
+    for ingredient, amount in DATA[recipe].items():
+        context['recipe'][ingredient] = round((amount * person), 2)
+    return render(request, 'calculator/index.html', context)
